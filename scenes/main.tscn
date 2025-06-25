@@ -20,7 +20,7 @@ coin = ExtResource("2_bp73t")
 [node name="View" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 0, 5)
 script = ExtResource("3_ys125")
-speed = 10.0
+speed = 20.0
 movementSnappiness = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="View"]
