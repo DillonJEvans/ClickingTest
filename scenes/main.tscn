@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://bp4o5wvw5axea"]
+
+[ext_resource type="Script" path="res://scripts/GameManager.cs" id="1_i312l"]
+[ext_resource type="PackedScene" uid="uid://bjb0x8nc688ev" path="res://scenes/coin.tscn" id="2_bp73t"]
+[ext_resource type="Script" path="res://scripts/View.cs" id="3_ys125"]
+[ext_resource type="PackedScene" uid="uid://b7ay6ngc02siu" path="res://scenes/player.tscn" id="4_qa66k"]
+[ext_resource type="Script" path="res://scripts/Score.cs" id="5_k3osg"]
+[ext_resource type="AudioStream" uid="uid://bkt2253s8bjo4" path="res://addons/Collect_Point_00.wav" id="6_1uxo1"]
+[ext_resource type="Script" path="res://scripts/PointSound.cs" id="7_wvpw4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_euuuj"]
+size = Vector2(50, 50)
+
+[node name="Main" type="Node3D"]
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("1_i312l")
+coin = ExtResource("2_bp73t")
+
+[node name="View" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 0, 5)
+script = ExtResource("3_ys125")
+speed = 10.0
+movementSnappiness = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="View"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_qa66k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+camera = NodePath("../View/Camera3D")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_euuuj")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.422618, -0.694272, 0.582563, 0, 0.642788, 0.766044, -0.906308, 0.323744, -0.271654, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.75
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -51.0
+offset_right = -10.0
+offset_bottom = 99.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 72
+text = "0"
+script = ExtResource("5_k3osg")
+
+[node name="PointSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1uxo1")
+volume_db = -10.0
+script = ExtResource("7_wvpw4")
+pitchScaleRange = Vector2(0.9, 1.2)
+
+[connection signal="CoinCollected" from="GameManager" to="PointSound" method="PlayRandom"]
+[connection signal="ScoreUpdated" from="GameManager" to="UI/Score" method="UpdateScore"]

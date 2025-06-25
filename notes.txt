@@ -1,0 +1,8 @@
+Questions:
+- Connecting signals in editor.
+
+
+Improvements:
+- Make the cube rotate to face the direction it is moving.
+- Add click indicator.
+- Add volume slider.
