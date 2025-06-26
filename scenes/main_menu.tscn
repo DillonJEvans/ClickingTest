@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu6bis6ofq5et"]
+
+[ext_resource type="Script" path="res://scripts/YouSpinMeRightRoundBabyRightRoundLikeARecordBaby.cs" id="1_dqp2k"]
+
+[sub_resource type="Environment" id="Environment_7n1pr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tc7ab"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q13vt"]
+material = SubResource("StandardMaterial3D_tc7ab")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CubeContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="CubeContainer"]
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CubeContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.75, 1.25)
+environment = SubResource("Environment_7n1pr")
+
+[node name="Sun" type="DirectionalLight3D" parent="CubeContainer/SubViewport"]
+transform = Transform3D(-0.422618, -0.694272, 0.582563, 0, 0.642788, 0.766044, -0.906308, 0.323744, -0.271654, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.75
+
+[node name="Cube" type="MeshInstance3D" parent="CubeContainer/SubViewport"]
+transform = Transform3D(0.221673, 0, 0.974804, 0, 1, 0, -0.974804, 0, 0.221673, 0, 0, 0)
+mesh = SubResource("BoxMesh_q13vt")
+script = ExtResource("1_dqp2k")
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Play"

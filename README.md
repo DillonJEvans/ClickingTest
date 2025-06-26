@@ -1,3 +1,5 @@
+Requires Godot v4.2.2
+
 ## Controls
 
 | | |
