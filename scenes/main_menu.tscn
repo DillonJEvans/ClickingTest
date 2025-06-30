@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu6bis6ofq5et"]
+[gd_scene load_steps=9 format=3 uid="uid://bu6bis6ofq5et"]
 
 [ext_resource type="PackedScene" uid="uid://el4afwmuy0bh" path="res://scenes/spin.tscn" id="1_23dy6"]
 [ext_resource type="Script" path="res://scripts/MainMenu.cs" id="1_b6e50"]
 [ext_resource type="PackedScene" uid="uid://bp4o5wvw5axea" path="res://scenes/game.tscn" id="3_ir5l1"]
 [ext_resource type="ButtonGroup" uid="uid://b0505m3pcbnn4" path="res://resources/difficulty_buttons.tres" id="4_upicv"]
+[ext_resource type="Script" path="res://scripts/DifficultySelectButton.cs" id="5_ttvy5"]
 
 [sub_resource type="Environment" id="Environment_7n1pr"]
 
@@ -68,26 +69,28 @@ layout_mode = 2
 toggle_mode = true
 button_group = ExtResource("4_upicv")
 text = "Easy"
+script = ExtResource("5_ttvy5")
 
-[node name="Medium" type="Button" parent="Buttons/DifficultySelect"]
+[node name="Normal" type="Button" parent="Buttons/DifficultySelect"]
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
 button_group = ExtResource("4_upicv")
-text = "Medium"
+text = "Normal"
+script = ExtResource("5_ttvy5")
+difficulty = 1
 
 [node name="Hard" type="Button" parent="Buttons/DifficultySelect"]
 layout_mode = 2
 toggle_mode = true
 button_group = ExtResource("4_upicv")
 text = "Hard"
+script = ExtResource("5_ttvy5")
+difficulty = 2
 
 [node name="QuitGame" type="Button" parent="Buttons"]
 layout_mode = 2
 text = "Quit Game"
 
 [connection signal="pressed" from="Buttons/Play" to="." method="PlayGame"]
-[connection signal="pressed" from="Buttons/DifficultySelect/Easy" to="." method="SetDifficulty" binds= ["Easy"]]
-[connection signal="pressed" from="Buttons/DifficultySelect/Medium" to="." method="SetDifficulty" binds= ["Medium"]]
-[connection signal="pressed" from="Buttons/DifficultySelect/Hard" to="." method="SetDifficulty" binds= ["Hard"]]
 [connection signal="pressed" from="Buttons/QuitGame" to="." method="QuitGame"]

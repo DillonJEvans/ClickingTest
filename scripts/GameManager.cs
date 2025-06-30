@@ -5,10 +5,10 @@ public partial class GameManager : Node
 	public static GameManager instance { get; private set; }
 	
 	
-	public enum Difficulty { Easy, Medium, Hard }
+	public enum Difficulty { Easy, Normal, Hard }
 	
 	
-	public Difficulty difficulty = Difficulty.Medium;
+	public Difficulty difficulty = Difficulty.Normal;
 
 
 	public override void _Ready()
