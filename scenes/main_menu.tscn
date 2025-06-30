@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bu6bis6ofq5et"]
+[gd_scene load_steps=8 format=3 uid="uid://bu6bis6ofq5et"]
 
-[ext_resource type="Script" path="res://scripts/YouSpinMeRightRoundBabyRightRoundLikeARecordBaby.cs" id="1_dqp2k"]
+[ext_resource type="PackedScene" uid="uid://el4afwmuy0bh" path="res://scenes/spin.tscn" id="1_23dy6"]
+[ext_resource type="Script" path="res://scripts/MainMenu.cs" id="1_b6e50"]
+[ext_resource type="PackedScene" uid="uid://bp4o5wvw5axea" path="res://scenes/game.tscn" id="3_ir5l1"]
+[ext_resource type="ButtonGroup" uid="uid://b0505m3pcbnn4" path="res://resources/difficulty_buttons.tres" id="4_upicv"]
 
 [sub_resource type="Environment" id="Environment_7n1pr"]
 
@@ -17,6 +20,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_b6e50")
+gameScene = ExtResource("3_ir5l1")
 
 [node name="CubeContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
@@ -38,12 +43,51 @@ shadow_enabled = true
 shadow_opacity = 0.75
 
 [node name="Cube" type="MeshInstance3D" parent="CubeContainer/SubViewport"]
-transform = Transform3D(0.221673, 0, 0.974804, 0, 1, 0, -0.974804, 0, 0.221673, 0, 0, 0)
+transform = Transform3D(0.706718, 0, 0.706718, 0, 1, 0, -0.706718, 0, 0.706718, 0, 0, 0)
 mesh = SubResource("BoxMesh_q13vt")
-script = ExtResource("1_dqp2k")
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="Spin" parent="CubeContainer/SubViewport/Cube" instance=ExtResource("1_23dy6")]
+secondsPerRotation = 20.0
+
+[node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 689.0
+offset_top = 198.0
+offset_right = 859.0
+offset_bottom = 299.0
+
+[node name="Play" type="Button" parent="Buttons"]
+layout_mode = 2
 text = "Play"
+
+[node name="DifficultySelect" type="HBoxContainer" parent="Buttons"]
+layout_mode = 2
+
+[node name="Easy" type="Button" parent="Buttons/DifficultySelect"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("4_upicv")
+text = "Easy"
+
+[node name="Medium" type="Button" parent="Buttons/DifficultySelect"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("4_upicv")
+text = "Medium"
+
+[node name="Hard" type="Button" parent="Buttons/DifficultySelect"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("4_upicv")
+text = "Hard"
+
+[node name="QuitGame" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Quit Game"
+
+[connection signal="pressed" from="Buttons/Play" to="." method="PlayGame"]
+[connection signal="pressed" from="Buttons/DifficultySelect/Easy" to="." method="SetDifficulty" binds= ["Easy"]]
+[connection signal="pressed" from="Buttons/DifficultySelect/Medium" to="." method="SetDifficulty" binds= ["Medium"]]
+[connection signal="pressed" from="Buttons/DifficultySelect/Hard" to="." method="SetDifficulty" binds= ["Hard"]]
+[connection signal="pressed" from="Buttons/QuitGame" to="." method="QuitGame"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bp4o5wvw5axea"]
 
-[ext_resource type="Script" path="res://scripts/GameManager.cs" id="1_i312l"]
+[ext_resource type="Script" path="res://scripts/GameManagerOld.cs" id="1_i312l"]
 [ext_resource type="PackedScene" uid="uid://bjb0x8nc688ev" path="res://scenes/coin.tscn" id="2_bp73t"]
 [ext_resource type="Script" path="res://scripts/View.cs" id="3_ys125"]
 [ext_resource type="PackedScene" uid="uid://b7ay6ngc02siu" path="res://scenes/player.tscn" id="4_qa66k"]
@@ -11,11 +11,14 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_euuuj"]
 size = Vector2(50, 50)
 
-[node name="Main" type="Node3D"]
+[node name="Game" type="Node3D"]
 
 [node name="GameManager" type="Node3D" parent="."]
 script = ExtResource("1_i312l")
 coin = ExtResource("2_bp73t")
+minSpawnPos = Vector3(-20, 1, -20)
+maxSpawnPos = Vector3(20, 1, 20)
+coinsAtOnce = 50
 
 [node name="View" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 0, 5)
@@ -36,7 +39,7 @@ acceleration = 100.0
 mesh = SubResource("PlaneMesh_euuuj")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.422618, -0.694272, 0.582563, 0, 0.642788, 0.766044, -0.906308, 0.323744, -0.271654, 0, 0, 0)
+transform = Transform3D(0.707107, -0.541675, 0.454519, 0, 0.642788, 0.766044, -0.707107, -0.541675, 0.454519, 0, 0, 0)
 shadow_enabled = true
 shadow_opacity = 0.75
 

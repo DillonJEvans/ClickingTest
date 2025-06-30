@@ -11,6 +11,7 @@ material = SubResource("StandardMaterial3D_5i0j1")
 [sub_resource type="BoxShape3D" id="BoxShape3D_neey6"]
 
 [node name="Player" type="Area3D"]
+collision_mask = 2
 script = ExtResource("1_ymnjy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
