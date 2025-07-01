@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Hud : Control
 {
-	[Export] private Label coinsCollectedLabel;
+	[Export] private Label scoreLabel;
 	[Export] private Label timeRemainingLabel;
 	[Export] private Timer timeLimit;
 
@@ -11,7 +11,7 @@ public partial class Hud : Control
 	{
 		base._Ready();
 
-		coinsCollectedLabel ??= GetNode<Label>("CoinsCollected");
+		scoreLabel ??= GetNode<Label>("Score");
 		timeRemainingLabel ??= GetNode<Label>("TimeRemaining");
 	}
 
@@ -23,11 +23,6 @@ public partial class Hud : Control
 	}
 
 
-	private void UpdateCoinsCollected(int coinsCollected)
-	{
-		coinsCollectedLabel.Text = coinsCollected.ToString();
-	}
-
 	private void UpdateTimeRemaining()
 	{
 		// Display the time left with 0 decimal places until it gets below 10 seconds,
@@ -36,5 +31,10 @@ public partial class Hud : Control
 		// To get the desired behavior, we check for 9.95 seconds instead of 10.
 		var decimalPlaces = timeLimit.TimeLeft >= 9.95f ? 0 : 1;
 		timeRemainingLabel.Text = timeLimit.TimeLeft.ToString($"N{decimalPlaces}");
+	}
+	
+	private void UpdateScore()
+	{
+		scoreLabel.Text = GameManager.instance.score.ToString();
 	}
 }

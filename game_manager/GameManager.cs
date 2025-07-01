@@ -21,12 +21,12 @@ public partial class GameManager : Node
 	}
 
 
-	public void MainMenu() => GetTree().ChangeSceneToPacked(mainMenu);
-	
+	public void MainMenu() => ChangeScene(mainMenu);
+
 	public void PlayGame()
 	{
 		score = 0;
-		GetTree().ChangeSceneToPacked(game);
+		ChangeScene(game);
 	}
 	
 	public void QuitGame()
@@ -34,5 +34,11 @@ public partial class GameManager : Node
 		// https://docs.godotengine.org/en/stable/tutorials/inputs/handling_quit_requests.html
 		GetTree().Root.PropagateNotification((int)NotificationWMCloseRequest);
 		GetTree().Quit();
+	}
+	
+	public void ChangeScene(PackedScene scene)
+	{
+		GetTree().ChangeSceneToPacked(scene);
+		GetTree().Paused = false;
 	}
 }

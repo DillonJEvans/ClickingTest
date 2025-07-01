@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bp4o5wvw5axea"]
+[gd_scene load_steps=12 format=3 uid="uid://bp4o5wvw5axea"]
 
 [ext_resource type="Script" path="res://game/View.cs" id="1_c26ff"]
 [ext_resource type="PackedScene" uid="uid://b7ay6ngc02siu" path="res://game/player/player.tscn" id="2_o7ard"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://game/Hud.cs" id="5_eto3k"]
 [ext_resource type="AudioStream" uid="uid://bkt2253s8bjo4" path="res://addons/Collect_Point_00.wav" id="6_1uxo1"]
 [ext_resource type="Script" path="res://game/TimeLimit.cs" id="6_pidmo"]
+[ext_resource type="Script" path="res://game/GameOverParent.cs" id="6_ukub4"]
+[ext_resource type="PackedScene" uid="uid://dto6xp1am2urf" path="res://game/game_over/game_over.tscn" id="7_3aaax"]
 [ext_resource type="Script" path="res://game/PointSound.cs" id="8_uws1w"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_euuuj"]
@@ -43,7 +45,7 @@ coinScene = ExtResource("4_ye12r")
 minSpawnPos = Vector3(-20, 0.75, -20)
 maxSpawnPos = Vector3(20, 0.75, 20)
 
-[node name="Hud" type="Control" parent="." node_paths=PackedStringArray("coinsCollectedLabel", "timeRemainingLabel", "timeLimit")]
+[node name="Hud" type="Control" parent="." node_paths=PackedStringArray("scoreLabel", "timeRemainingLabel", "timeLimit")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,11 +53,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_eto3k")
-coinsCollectedLabel = NodePath("CoinsCollected")
+scoreLabel = NodePath("Score")
 timeRemainingLabel = NodePath("TimeRemaining")
 timeLimit = NodePath("../TimeLimit")
 
-[node name="CoinsCollected" type="Label" parent="Hud"]
+[node name="Score" type="Label" parent="Hud"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -69,13 +71,26 @@ text = "0"
 
 [node name="TimeRemaining" type="Label" parent="Hud"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_right = 92.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 72
 text = "60"
+
+[node name="GameOverParent" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_ukub4")
+gameOverScene = ExtResource("7_3aaax")
 
 [node name="TimeLimit" type="Timer" parent="."]
 one_shot = true
 script = ExtResource("6_pidmo")
+easyTime = 20.0
+normalTime = 15.0
+hardTime = 10.0
 
 [node name="PointSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_1uxo1")
@@ -83,5 +98,6 @@ volume_db = -10.0
 script = ExtResource("8_uws1w")
 pitchScaleRange = Vector2(0.9, 1.2)
 
-[connection signal="CoinCollected" from="CoinSpawner" to="Hud" method="UpdateCoinsCollected"]
-[connection signal="CoinCollected" from="CoinSpawner" to="PointSound" method="PlayRandom" unbinds=1]
+[connection signal="CoinCollected" from="CoinSpawner" to="Hud" method="UpdateScore"]
+[connection signal="CoinCollected" from="CoinSpawner" to="PointSound" method="PlayRandom"]
+[connection signal="timeout" from="TimeLimit" to="GameOverParent" method="GameOver"]

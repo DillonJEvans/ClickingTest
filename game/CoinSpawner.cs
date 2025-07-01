@@ -3,7 +3,7 @@ using Godot;
 public partial class CoinSpawner : Node3D
 {
     [Signal]
-    public delegate void CoinCollectedEventHandler(int coinsCollected);
+    public delegate void CoinCollectedEventHandler();
     
     
     [Export] private PackedScene coinScene;
@@ -14,11 +14,8 @@ public partial class CoinSpawner : Node3D
     [Export] private int normalCoinsAtOnce = 15;
     [Export] private int hardCoinsAtOnce = 10;
 
-
-    public int coinsCollected { get; private set; }
     
     private int coinsSpawned = 0;
-    
     private RandomNumberGenerator random = new();
 
 
@@ -35,9 +32,9 @@ public partial class CoinSpawner : Node3D
 
     public void CollectCoin()
     {
-        coinsCollected++;
+        GameManager.instance.score++;
         SpawnCoin();
-        EmitSignal(SignalName.CoinCollected, coinsCollected);
+        EmitSignal(SignalName.CoinCollected);
     }
     
     

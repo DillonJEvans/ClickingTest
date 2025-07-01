@@ -47,7 +47,7 @@ public partial class Player : Area3D
 		// The cube always slightly overshoots the target,
 		// so once its velocity is going away from the target,
 		// it must have reached and past the target.
-		if (velocity.Dot(Position.DirectionTo(target)) < 0f)
+		if (velocity.Dot(target - Position) < 0f)
 		{
 			Position = target;
 			velocity = Vector3.Zero;
