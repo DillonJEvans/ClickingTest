@@ -21,7 +21,6 @@ public partial class GameManager : Node
 
 	public void ChangeScene(PackedScene scene) => GetTree().ChangeSceneToPacked(scene);
 	
-	
 	public void QuitGame()
 	{
 		// https://docs.godotengine.org/en/stable/tutorials/inputs/handling_quit_requests.html
