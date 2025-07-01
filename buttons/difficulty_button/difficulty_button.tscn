@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2f7tk33p202c"]
+
+[ext_resource type="ButtonGroup" uid="uid://d0u4oawur1itw" path="res://buttons/difficulty_button/difficulty_buttons_group.tres" id="1_qf511"]
+[ext_resource type="Script" path="res://buttons/difficulty_button/DifficultyButton.cs" id="1_qokwj"]
+
+[node name="DifficultyButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+toggle_mode = true
+button_group = ExtResource("1_qf511")
+text = "[Difficulty Here]"
+script = ExtResource("1_qokwj")
+
+[connection signal="pressed" from="." to="." method="OnPressed"]

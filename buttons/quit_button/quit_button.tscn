@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c54pdfll3rtss"]
+
+[ext_resource type="Script" path="res://buttons/quit_button/QuitButton.cs" id="1_qkctx"]
+
+[node name="QuitButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Quit Game"
+script = ExtResource("1_qkctx")
+
+[connection signal="pressed" from="." to="." method="OnPressed"]

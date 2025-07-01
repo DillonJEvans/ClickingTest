@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://1y3i0k0wtri8"]
+
+[ext_resource type="Script" path="res://buttons/main_menu_button/MainMenuButton.cs" id="1_7uuou"]
+
+[node name="MainMenuButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Main Menu"
+script = ExtResource("1_7uuou")
+
+[connection signal="pressed" from="." to="." method="OnPressed"]

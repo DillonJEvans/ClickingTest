@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://bp4o5wvw5axea"]
 
-[ext_resource type="Script" path="res://scripts/CoinSpawner.cs" id="1_6rh0f"]
-[ext_resource type="PackedScene" uid="uid://bjb0x8nc688ev" path="res://scenes/coin.tscn" id="2_bp73t"]
-[ext_resource type="Script" path="res://scripts/View.cs" id="3_ys125"]
-[ext_resource type="PackedScene" uid="uid://b7ay6ngc02siu" path="res://scenes/player.tscn" id="4_qa66k"]
-[ext_resource type="Script" path="res://scripts/Hud.cs" id="5_eto3k"]
+[ext_resource type="Script" path="res://game/View.cs" id="1_c26ff"]
+[ext_resource type="PackedScene" uid="uid://b7ay6ngc02siu" path="res://game/player/player.tscn" id="2_o7ard"]
+[ext_resource type="Script" path="res://game/CoinSpawner.cs" id="3_hebcy"]
+[ext_resource type="PackedScene" uid="uid://bjb0x8nc688ev" path="res://game/coin/coin.tscn" id="4_ye12r"]
+[ext_resource type="Script" path="res://game/Hud.cs" id="5_eto3k"]
 [ext_resource type="AudioStream" uid="uid://bkt2253s8bjo4" path="res://addons/Collect_Point_00.wav" id="6_1uxo1"]
-[ext_resource type="Script" path="res://scripts/PointSound.cs" id="7_wvpw4"]
-[ext_resource type="Script" path="res://scripts/TimeLimit.cs" id="9_50f46"]
+[ext_resource type="Script" path="res://game/TimeLimit.cs" id="6_pidmo"]
+[ext_resource type="Script" path="res://game/PointSound.cs" id="8_uws1w"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_euuuj"]
 size = Vector2(50, 50)
@@ -16,7 +16,7 @@ size = Vector2(50, 50)
 
 [node name="View" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 0, 5)
-script = ExtResource("3_ys125")
+script = ExtResource("1_c26ff")
 speed = 20.0
 movementSnappiness = 5.0
 
@@ -31,15 +31,15 @@ shadow_opacity = 0.75
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_euuuj")
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_qa66k")]
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_o7ard")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 camera = NodePath("../View/Camera3D")
 maxSpeed = 50.0
 acceleration = 100.0
 
 [node name="CoinSpawner" type="Node3D" parent="."]
-script = ExtResource("1_6rh0f")
-coinScene = ExtResource("2_bp73t")
+script = ExtResource("3_hebcy")
+coinScene = ExtResource("4_ye12r")
 minSpawnPos = Vector3(-20, 0.75, -20)
 maxSpawnPos = Vector3(20, 0.75, 20)
 
@@ -73,15 +73,15 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "60"
 
+[node name="TimeLimit" type="Timer" parent="."]
+one_shot = true
+script = ExtResource("6_pidmo")
+
 [node name="PointSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_1uxo1")
 volume_db = -10.0
-script = ExtResource("7_wvpw4")
+script = ExtResource("8_uws1w")
 pitchScaleRange = Vector2(0.9, 1.2)
-
-[node name="TimeLimit" type="Timer" parent="."]
-one_shot = true
-script = ExtResource("9_50f46")
 
 [connection signal="CoinCollected" from="CoinSpawner" to="Hud" method="UpdateCoinsCollected"]
 [connection signal="CoinCollected" from="CoinSpawner" to="PointSound" method="PlayRandom" unbinds=1]

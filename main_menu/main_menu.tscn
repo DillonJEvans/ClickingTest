@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bu6bis6ofq5et"]
+[gd_scene load_steps=8 format=3 uid="uid://bu6bis6ofq5et"]
 
-[ext_resource type="PackedScene" uid="uid://el4afwmuy0bh" path="res://scenes/spin.tscn" id="1_23dy6"]
-[ext_resource type="Script" path="res://scripts/MainMenu.cs" id="1_b6e50"]
-[ext_resource type="PackedScene" uid="uid://bp4o5wvw5axea" path="res://scenes/game.tscn" id="3_ir5l1"]
-[ext_resource type="ButtonGroup" uid="uid://b0505m3pcbnn4" path="res://resources/difficulty_buttons.tres" id="4_upicv"]
-[ext_resource type="Script" path="res://scripts/DifficultySelectButton.cs" id="5_ttvy5"]
+[ext_resource type="PackedScene" uid="uid://el4afwmuy0bh" path="res://animations/spin/spin.tscn" id="1_23dy6"]
+[ext_resource type="PackedScene" uid="uid://chnoefqosytl8" path="res://buttons/play_button/play_button.tscn" id="2_7krcj"]
+[ext_resource type="PackedScene" uid="uid://d2f7tk33p202c" path="res://buttons/difficulty_button/difficulty_button.tscn" id="3_yucoe"]
+[ext_resource type="PackedScene" uid="uid://c54pdfll3rtss" path="res://buttons/quit_button/quit_button.tscn" id="4_i6ank"]
 
 [sub_resource type="Environment" id="Environment_7n1pr"]
 
@@ -21,8 +20,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_b6e50")
-gameScene = ExtResource("3_ir5l1")
 
 [node name="CubeContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
@@ -57,40 +54,25 @@ offset_top = 198.0
 offset_right = 859.0
 offset_bottom = 299.0
 
-[node name="Play" type="Button" parent="Buttons"]
+[node name="PlayButton" parent="Buttons" instance=ExtResource("2_7krcj")]
 layout_mode = 2
-text = "Play"
 
 [node name="DifficultySelect" type="HBoxContainer" parent="Buttons"]
 layout_mode = 2
 
-[node name="Easy" type="Button" parent="Buttons/DifficultySelect"]
+[node name="Easy" parent="Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
 layout_mode = 2
-toggle_mode = true
-button_group = ExtResource("4_upicv")
 text = "Easy"
-script = ExtResource("5_ttvy5")
 
-[node name="Normal" type="Button" parent="Buttons/DifficultySelect"]
+[node name="Normal" parent="Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
 layout_mode = 2
-toggle_mode = true
-button_pressed = true
-button_group = ExtResource("4_upicv")
 text = "Normal"
-script = ExtResource("5_ttvy5")
 difficulty = 1
 
-[node name="Hard" type="Button" parent="Buttons/DifficultySelect"]
+[node name="Hard" parent="Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
 layout_mode = 2
-toggle_mode = true
-button_group = ExtResource("4_upicv")
 text = "Hard"
-script = ExtResource("5_ttvy5")
 difficulty = 2
 
-[node name="QuitGame" type="Button" parent="Buttons"]
+[node name="QuitButton" parent="Buttons" instance=ExtResource("4_i6ank")]
 layout_mode = 2
-text = "Quit Game"
-
-[connection signal="pressed" from="Buttons/Play" to="." method="PlayGame"]
-[connection signal="pressed" from="Buttons/QuitGame" to="." method="QuitGame"]

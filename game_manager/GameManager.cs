@@ -2,13 +2,15 @@ using Godot;
 
 public partial class GameManager : Node
 {
-	public static GameManager instance { get; private set; }
-	
-	
 	public enum Difficulty { Easy, Normal, Hard }
 	
+	public static GameManager instance { get; private set; }
+
+	[Export] private PackedScene mainMenu;
+	[Export] private PackedScene game;
 	
 	public Difficulty difficulty = Difficulty.Normal;
+	public int score = 0;
 
 
 	public override void _Ready()
@@ -19,7 +21,13 @@ public partial class GameManager : Node
 	}
 
 
-	public void ChangeScene(PackedScene scene) => GetTree().ChangeSceneToPacked(scene);
+	public void MainMenu() => GetTree().ChangeSceneToPacked(mainMenu);
+	
+	public void PlayGame()
+	{
+		score = 0;
+		GetTree().ChangeSceneToPacked(game);
+	}
 	
 	public void QuitGame()
 	{
