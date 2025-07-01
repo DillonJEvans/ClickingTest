@@ -84,3 +84,7 @@ camera_reset={
 
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Coin"
+
+[rendering]
+
+anti_aliasing/quality/msaa_3d=3
