@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bp4o5wvw5axea"]
+[gd_scene load_steps=13 format=3 uid="uid://bp4o5wvw5axea"]
 
 [ext_resource type="Script" path="res://game/View.cs" id="1_c26ff"]
 [ext_resource type="PackedScene" uid="uid://b7ay6ngc02siu" path="res://game/player/player.tscn" id="2_o7ard"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://game/GameOverParent.cs" id="6_ukub4"]
 [ext_resource type="PackedScene" uid="uid://dto6xp1am2urf" path="res://game/game_over/game_over.tscn" id="7_3aaax"]
 [ext_resource type="Script" path="res://game/PointSound.cs" id="8_uws1w"]
+[ext_resource type="Script" path="res://game/ScoreKeeper.cs" id="11_qorr4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_euuuj"]
 size = Vector2(50, 50)
@@ -44,6 +45,9 @@ script = ExtResource("3_hebcy")
 coinScene = ExtResource("4_ye12r")
 minSpawnPos = Vector3(-20, 0.75, -20)
 maxSpawnPos = Vector3(20, 0.75, 20)
+easyCoinsAtOnce = 60
+normalCoinsAtOnce = 50
+hardCoinsAtOnce = 40
 
 [node name="Hud" type="Control" parent="." node_paths=PackedStringArray("scoreLabel", "timeRemainingLabel", "timeLimit")]
 layout_mode = 3
@@ -98,6 +102,11 @@ volume_db = -10.0
 script = ExtResource("8_uws1w")
 pitchScaleRange = Vector2(0.9, 1.2)
 
-[connection signal="CoinCollected" from="CoinSpawner" to="Hud" method="UpdateScore"]
+[node name="ScoreKeeper" type="Node3D" parent="."]
+script = ExtResource("11_qorr4")
+
+[connection signal="TargetChanged" from="Player" to="ScoreKeeper" method="ResetMultiplier"]
 [connection signal="CoinCollected" from="CoinSpawner" to="PointSound" method="PlayRandom"]
+[connection signal="CoinCollected" from="CoinSpawner" to="ScoreKeeper" method="CollectCoin"]
 [connection signal="timeout" from="TimeLimit" to="GameOverParent" method="GameOver"]
+[connection signal="ScoreChanged" from="ScoreKeeper" to="Hud" method="UpdateScore" unbinds=1]

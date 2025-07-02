@@ -2,6 +2,10 @@ using Godot;
 
 public partial class Player : Area3D
 {
+	[Signal]
+	public delegate void TargetChangedEventHandler();
+	
+	
 	[Export] private Camera3D camera;
 	[Export] private float maxSpeed = 10f;
 	[Export] private float acceleration = 10f;
@@ -55,25 +59,31 @@ public partial class Player : Area3D
 	}
 
 
+	public Vector3? GetMousePositionOnMovementPlane()
+	{
+		var mousePosition = GetViewport().GetMousePosition();
+		var rayOrigin = camera.ProjectRayOrigin(mousePosition);
+		var rayNormal = camera.ProjectRayNormal(mousePosition);
+		
+		return movementPlane.IntersectsRay(rayOrigin, rayNormal);
+	}
+	
 	private void UpdateTarget()
 	{
 		if (!Input.IsActionJustPressed("move_unit"))
 		{
 			return;
 		}
-		
-		var mousePos = GetViewport().GetMousePosition();
-		var rayOrigin = camera.ProjectRayOrigin(mousePos);
-		var rayNormal = camera.ProjectRayNormal(mousePos);
 
-		var worldPos = movementPlane.IntersectsRay(rayOrigin, rayNormal);
-		if (worldPos is null)
+		var newTarget = GetMousePositionOnMovementPlane();
+		if (newTarget is null)
 		{
 			return;
 		}
 
-		target = worldPos.Value;
+		target = newTarget.Value;
 		velocity = Vector3.Zero;
+		EmitSignal(SignalName.TargetChanged);
 	}
 
 
@@ -97,13 +107,5 @@ public partial class Player : Area3D
 		
 		var directionToTarget = Position.DirectionTo(target);
 		return directionToTarget * acceleration * accelerationDirection;
-	}
-
-
-	// For messing around with, not currently used.
-	private static Vector3 Ease(Vector3 a, Vector3 b, float weight, float curve)
-	{
-		var t = Mathf.Ease(weight, curve);
-		return (1f - t) * a + t * b;
 	}
 }

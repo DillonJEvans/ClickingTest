@@ -32,7 +32,7 @@ public partial class CoinSpawner : Node3D
 
     public void CollectCoin()
     {
-        GameManager.instance.score++;
+        // GameManager.instance.score++;
         SpawnCoin();
         EmitSignal(SignalName.CoinCollected);
     }
