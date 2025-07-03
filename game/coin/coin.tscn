@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjb0x8nc688ev"]
+[gd_scene load_steps=8 format=3 uid="uid://bjb0x8nc688ev"]
 
-[ext_resource type="Script" path="res://game/coin/Coin.cs" id="1_mj7cr"]
-[ext_resource type="PackedScene" uid="uid://el4afwmuy0bh" path="res://animations/spin/spin.tscn" id="2_henqv"]
+[ext_resource type="Script" path="res://game/coin/RandomAnimationStartPosition.cs" id="1_4dqcn"]
 [ext_resource type="PackedScene" uid="uid://dos85j8uhb1fh" path="res://animations/bounce/bounce.tscn" id="3_p73ar"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40k2o"]
@@ -19,9 +18,25 @@ height = 0.125
 height = 0.125
 radius = 0.375
 
+[sub_resource type="Animation" id="Animation_gynra"]
+resource_name = "Spin"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2.5, 1, 0, 1, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3tad"]
+_data = {
+"Spin": SubResource("Animation_gynra")
+}
+
 [node name="Coin" type="Area3D"]
 collision_layer = 2
-script = ExtResource("1_mj7cr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -31,11 +46,15 @@ mesh = SubResource("CylinderMesh_ursyj")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_kolhr")
 
-[node name="Spin" parent="." instance=ExtResource("2_henqv")]
-randomInitialRotation = true
+[node name="Spin" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x3tad")
+}
+autoplay = "Spin"
+script = ExtResource("1_4dqcn")
 
 [node name="Bounce" parent="." instance=ExtResource("3_p73ar")]
 secondsPerBounce = 3.0
 randomInitialPhase = true
 
-[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="area_entered" from="." to="." method="queue_free" unbinds=1]

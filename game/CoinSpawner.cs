@@ -32,7 +32,6 @@ public partial class CoinSpawner : Node3D
 
     public void CollectCoin()
     {
-        // GameManager.instance.score++;
         SpawnCoin();
         EmitSignal(SignalName.CoinCollected);
     }
@@ -51,7 +50,7 @@ public partial class CoinSpawner : Node3D
     
     private void SpawnCoin()
     {
-        if (coinScene.Instantiate() is not Coin coin)
+        if (coinScene.Instantiate() is not Area3D coin)
         {
             GD.PrintErr("Couldn't spawn coin, or it wasn't a coin.");
             return;
@@ -66,7 +65,7 @@ public partial class CoinSpawner : Node3D
             random.RandfRange(minSpawnPos.Z, maxSpawnPos.Z)
             );
 
-        coin.Collected += CollectCoin;
+        coin.AreaEntered += _ => CollectCoin();
         AddChild(coin);
     }
 }

@@ -3,21 +3,21 @@ using Godot;
 public partial class ScoreKeeper : Node3D
 {
     [Signal]
-    public delegate void ScoreChangedEventHandler(int multiplier);
+    public delegate void ScoreChangedEventHandler(int scoreChange);
     
     
-    private int multiplier = 1;
+    private int nextScoreChange = 1;
 
 
-    public void ResetMultiplier()
+    public void ResetScoreChange()
     {
-        multiplier = 1;
+        nextScoreChange = 1;
     }
 
     public void CollectCoin()
     {
-        GameManager.instance.score += multiplier;
-        EmitSignal(SignalName.ScoreChanged, multiplier);
-        multiplier *= 2;
+        GameManager.instance.score += nextScoreChange;
+        EmitSignal(SignalName.ScoreChanged, nextScoreChange);
+        nextScoreChange *= 2;
     }
 }

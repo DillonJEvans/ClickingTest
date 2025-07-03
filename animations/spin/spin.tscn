@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://el4afwmuy0bh"]
-
-[ext_resource type="Script" path="res://animations/spin/Spin.cs" id="1_cvp53"]
-
-[node name="Spin" type="Node3D"]
-script = ExtResource("1_cvp53")

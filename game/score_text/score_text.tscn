@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://cal5hk70uh3br"]
+
+[sub_resource type="Animation" id="Animation_eq2sj"]
+resource_name = "FadeOut"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(0, 1, 0, 1), Color(0, 1, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:outline_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_merlj"]
+_data = {
+"FadeOut": SubResource("Animation_eq2sj")
+}
+
+[node name="ScoreText" type="Label3D"]
+pixel_size = 0.02
+billboard = 1
+modulate = Color(0, 1, 0, 1)
+text = "+1"
+font_size = 72
+
+[node name="FadeOut" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_merlj")
+}
+autoplay = "FadeOut"
+
+[connection signal="animation_finished" from="FadeOut" to="." method="queue_free" unbinds=1]

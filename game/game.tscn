@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bp4o5wvw5axea"]
+[gd_scene load_steps=15 format=3 uid="uid://bp4o5wvw5axea"]
 
 [ext_resource type="Script" path="res://game/View.cs" id="1_c26ff"]
 [ext_resource type="PackedScene" uid="uid://b7ay6ngc02siu" path="res://game/player/player.tscn" id="2_o7ard"]
 [ext_resource type="Script" path="res://game/CoinSpawner.cs" id="3_hebcy"]
 [ext_resource type="PackedScene" uid="uid://bjb0x8nc688ev" path="res://game/coin/coin.tscn" id="4_ye12r"]
 [ext_resource type="Script" path="res://game/Hud.cs" id="5_eto3k"]
+[ext_resource type="Script" path="res://game/ScoreTextSpawner.cs" id="5_xtlrq"]
 [ext_resource type="AudioStream" uid="uid://bkt2253s8bjo4" path="res://addons/Collect_Point_00.wav" id="6_1uxo1"]
+[ext_resource type="PackedScene" uid="uid://cal5hk70uh3br" path="res://game/score_text/score_text.tscn" id="6_8yari"]
 [ext_resource type="Script" path="res://game/TimeLimit.cs" id="6_pidmo"]
 [ext_resource type="Script" path="res://game/GameOverParent.cs" id="6_ukub4"]
 [ext_resource type="PackedScene" uid="uid://dto6xp1am2urf" path="res://game/game_over/game_over.tscn" id="7_3aaax"]
@@ -48,6 +50,15 @@ maxSpawnPos = Vector3(20, 0.75, 20)
 easyCoinsAtOnce = 60
 normalCoinsAtOnce = 50
 hardCoinsAtOnce = 40
+
+[node name="ScoreTextSpawner" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("5_xtlrq")
+scoreTextScene = ExtResource("6_8yari")
+player = NodePath("../Player")
+spawnOffset = Vector3(0, 2, 0)
+
+[node name="ScoreKeeper" type="Node3D" parent="."]
+script = ExtResource("11_qorr4")
 
 [node name="Hud" type="Control" parent="." node_paths=PackedStringArray("scoreLabel", "timeRemainingLabel", "timeLimit")]
 layout_mode = 3
@@ -102,11 +113,9 @@ volume_db = -10.0
 script = ExtResource("8_uws1w")
 pitchScaleRange = Vector2(0.9, 1.2)
 
-[node name="ScoreKeeper" type="Node3D" parent="."]
-script = ExtResource("11_qorr4")
-
-[connection signal="TargetChanged" from="Player" to="ScoreKeeper" method="ResetMultiplier"]
-[connection signal="CoinCollected" from="CoinSpawner" to="PointSound" method="PlayRandom"]
+[connection signal="TargetChanged" from="Player" to="ScoreKeeper" method="ResetScoreChange"]
 [connection signal="CoinCollected" from="CoinSpawner" to="ScoreKeeper" method="CollectCoin"]
-[connection signal="timeout" from="TimeLimit" to="GameOverParent" method="GameOver"]
+[connection signal="CoinCollected" from="CoinSpawner" to="PointSound" method="PlayRandom"]
+[connection signal="ScoreChanged" from="ScoreKeeper" to="ScoreTextSpawner" method="SpawnScoreText"]
 [connection signal="ScoreChanged" from="ScoreKeeper" to="Hud" method="UpdateScore" unbinds=1]
+[connection signal="timeout" from="TimeLimit" to="GameOverParent" method="GameOver"]

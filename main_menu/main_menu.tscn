@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu6bis6ofq5et"]
+[gd_scene load_steps=9 format=3 uid="uid://bu6bis6ofq5et"]
 
-[ext_resource type="PackedScene" uid="uid://el4afwmuy0bh" path="res://animations/spin/spin.tscn" id="1_23dy6"]
 [ext_resource type="PackedScene" uid="uid://chnoefqosytl8" path="res://buttons/play_button/play_button.tscn" id="2_7krcj"]
 [ext_resource type="PackedScene" uid="uid://d2f7tk33p202c" path="res://buttons/difficulty_button/difficulty_button.tscn" id="3_yucoe"]
 [ext_resource type="PackedScene" uid="uid://c54pdfll3rtss" path="res://buttons/quit_button/quit_button.tscn" id="4_i6ank"]
@@ -12,6 +11,24 @@ albedo_color = Color(0, 1, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_q13vt"]
 material = SubResource("StandardMaterial3D_tc7ab")
+
+[sub_resource type="Animation" id="Animation_h5q02"]
+resource_name = "Spin"
+length = 5.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 5, 1, 0, 0.707, 0, 0.707)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jictm"]
+_data = {
+"Spin": SubResource("Animation_h5q02")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -41,11 +58,14 @@ shadow_enabled = true
 shadow_opacity = 0.75
 
 [node name="Cube" type="MeshInstance3D" parent="CubeContainer/SubViewport"]
-transform = Transform3D(0.706718, 0, 0.706718, 0, 1, 0, -0.706718, 0, 0.706718, 0, 0, 0)
+transform = Transform3D(0.99945, 0, 0, 0, 1, 0, 0, 0, 0.99945, 0, 0, 0)
 mesh = SubResource("BoxMesh_q13vt")
 
-[node name="Spin" parent="CubeContainer/SubViewport/Cube" instance=ExtResource("1_23dy6")]
-secondsPerRotation = 20.0
+[node name="Spin" type="AnimationPlayer" parent="CubeContainer/SubViewport/Cube"]
+libraries = {
+"": SubResource("AnimationLibrary_jictm")
+}
+autoplay = "Spin"
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 0
