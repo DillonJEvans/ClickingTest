@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://blrkjov246j2c"]
+
+[ext_resource type="Script" path="res://high_scores/grid_labels/date_time_label/DateTimeLabel.cs" id="1_downj"]
+
+[node name="DateTimeLabel" type="Label"]
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 120.0
+offset_bottom = 37.0
+theme_override_font_sizes/font_size = 24
+text = "Yesterday"
+horizontal_alignment = 2
+script = ExtResource("1_downj")
+lowercase = true

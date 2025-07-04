@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bu6bis6ofq5et"]
+[gd_scene load_steps=10 format=3 uid="uid://bu6bis6ofq5et"]
 
 [ext_resource type="PackedScene" uid="uid://chnoefqosytl8" path="res://buttons/play_button/play_button.tscn" id="2_7krcj"]
 [ext_resource type="PackedScene" uid="uid://d2f7tk33p202c" path="res://buttons/difficulty_button/difficulty_button.tscn" id="3_yucoe"]
 [ext_resource type="PackedScene" uid="uid://c54pdfll3rtss" path="res://buttons/quit_button/quit_button.tscn" id="4_i6ank"]
+[ext_resource type="PackedScene" uid="uid://1hj7vyw747rf" path="res://high_scores/high_scores.tscn" id="4_iga78"]
 
 [sub_resource type="Environment" id="Environment_7n1pr"]
 
@@ -38,61 +39,84 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CubeContainer" type="SubViewportContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -317.0
+offset_top = -213.5
+offset_right = 317.0
+offset_bottom = 213.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
 
-[node name="SubViewport" type="SubViewport" parent="CubeContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CubeContainer" type="SubViewportContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/VBoxContainer/CubeContainer"]
 handle_input_locally = false
 size = Vector2i(256, 256)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="CubeContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer/VBoxContainer/CubeContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.75, 1.25)
 environment = SubResource("Environment_7n1pr")
 
-[node name="Sun" type="DirectionalLight3D" parent="CubeContainer/SubViewport"]
+[node name="Sun" type="DirectionalLight3D" parent="HBoxContainer/VBoxContainer/CubeContainer/SubViewport"]
 transform = Transform3D(-0.422618, -0.694272, 0.582563, 0, 0.642788, 0.766044, -0.906308, 0.323744, -0.271654, 0, 0, 0)
 shadow_enabled = true
 shadow_opacity = 0.75
 
-[node name="Cube" type="MeshInstance3D" parent="CubeContainer/SubViewport"]
+[node name="Cube" type="MeshInstance3D" parent="HBoxContainer/VBoxContainer/CubeContainer/SubViewport"]
 transform = Transform3D(0.99945, 0, 0, 0, 1, 0, 0, 0, 0.99945, 0, 0, 0)
 mesh = SubResource("BoxMesh_q13vt")
 
-[node name="Spin" type="AnimationPlayer" parent="CubeContainer/SubViewport/Cube"]
+[node name="Spin" type="AnimationPlayer" parent="HBoxContainer/VBoxContainer/CubeContainer/SubViewport/Cube"]
 libraries = {
 "": SubResource("AnimationLibrary_jictm")
 }
 autoplay = "Spin"
 
-[node name="Buttons" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 689.0
-offset_top = 198.0
-offset_right = 859.0
-offset_bottom = 299.0
+[node name="Buttons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="PlayButton" parent="Buttons" instance=ExtResource("2_7krcj")]
+[node name="PlayButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("2_7krcj")]
 layout_mode = 2
 
-[node name="DifficultySelect" type="HBoxContainer" parent="Buttons"]
+[node name="DifficultySelect" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="Easy" parent="Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
+[node name="Easy" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
 layout_mode = 2
 text = "Easy"
 
-[node name="Normal" parent="Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
+[node name="Normal" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
 layout_mode = 2
 text = "Normal"
 difficulty = 1
 
-[node name="Hard" parent="Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
+[node name="Hard" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
 layout_mode = 2
 text = "Hard"
 difficulty = 2
 
-[node name="QuitButton" parent="Buttons" instance=ExtResource("4_i6ank")]
+[node name="QuitButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("4_i6ank")]
 layout_mode = 2
+
+[node name="HighScores" parent="HBoxContainer" instance=ExtResource("4_iga78")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+maximumHighScores = 3

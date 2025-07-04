@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://1hj7vyw747rf"]
+
+[ext_resource type="Script" path="res://high_scores/HighScores.cs" id="1_24hfm"]
+[ext_resource type="PackedScene" uid="uid://bui5n7qul2a74" path="res://high_scores/grid_labels/row_number_label/row_number_label.tscn" id="2_hhkl6"]
+[ext_resource type="PackedScene" uid="uid://ivlfrgq6dq2w" path="res://high_scores/grid_labels/score_label/score_label.tscn" id="3_jrtta"]
+[ext_resource type="PackedScene" uid="uid://dgppdwm8ewrkj" path="res://high_scores/grid_labels/difficulty_label/difficulty_label.tscn" id="4_gspb0"]
+[ext_resource type="PackedScene" uid="uid://blrkjov246j2c" path="res://high_scores/grid_labels/date_time_label/date_time_label.tscn" id="5_0kbys"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p5tjp"]
+content_margin_left = 10.0
+content_margin_top = 0.0
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 0.25098)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_h0bnu"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+
+[node name="HighScores" type="PanelContainer" node_paths=PackedStringArray("grid")]
+offset_right = 313.0
+offset_bottom = 116.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p5tjp")
+script = ExtResource("1_24hfm")
+grid = NodePath("VBoxContainer/GridContainer")
+rowNumberLabel = ExtResource("2_hhkl6")
+scoreLabel = ExtResource("3_jrtta")
+difficultyLabel = ExtResource("4_gspb0")
+dateTimeLabel = ExtResource("5_0kbys")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "High Scores"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_h0bnu")
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 4
+
+[node name="RowNumber" parent="VBoxContainer/GridContainer" instance=ExtResource("2_hhkl6")]
+layout_mode = 2
+
+[node name="Score" parent="VBoxContainer/GridContainer" instance=ExtResource("3_jrtta")]
+layout_mode = 2
+
+[node name="Difficulty" parent="VBoxContainer/GridContainer" instance=ExtResource("4_gspb0")]
+layout_mode = 2
+
+[node name="DateTime" parent="VBoxContainer/GridContainer" instance=ExtResource("5_0kbys")]
+layout_mode = 2
