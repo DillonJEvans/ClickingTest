@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class HighScores : Control
 {
-	[Export] private GridContainer grid;
+	[Export] public GridContainer grid;
 	[Export] public int maximumHighScores = 10;
 
 	[ExportGroup("Label Scenes")]
@@ -44,10 +44,22 @@ public partial class HighScores : Control
 		}
 		
 		highScores.Insert(index, highScore);
+		while (highScores.Count > maximumHighScores)
+		{
+			highScores.RemoveAt(highScores.Count - 1);
+		}
+		
 		HighScoresIO.SaveHighScores(highScores);
 		UpdateChildren();
 		
 		return index;
+	}
+
+	public void ResetHighScores()
+	{
+		highScores.Clear();
+		HighScoresIO.ResetHighScores();
+		UpdateChildren();
 	}
 
 

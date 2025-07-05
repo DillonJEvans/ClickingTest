@@ -18,6 +18,6 @@ public partial class ScoreKeeper : Node3D
     {
         GameManager.instance.score += nextScoreChange;
         EmitSignal(SignalName.ScoreChanged, nextScoreChange);
-        nextScoreChange *= 2;
+        nextScoreChange++;
     }
 }

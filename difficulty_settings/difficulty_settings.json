@@ -1,0 +1,12 @@
+{
+	"timeLimit": {
+		"easy": 20.0,
+		"normal": 15.0,
+		"hard": 10.0
+	},
+	"coinsAtOnce": {
+		"easy": 40,
+		"normal": 50,
+		"hard": 60
+	}
+}

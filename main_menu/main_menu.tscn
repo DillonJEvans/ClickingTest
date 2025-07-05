@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bu6bis6ofq5et"]
+[gd_scene load_steps=11 format=3 uid="uid://bu6bis6ofq5et"]
 
 [ext_resource type="PackedScene" uid="uid://chnoefqosytl8" path="res://buttons/play_button/play_button.tscn" id="2_7krcj"]
 [ext_resource type="PackedScene" uid="uid://d2f7tk33p202c" path="res://buttons/difficulty_button/difficulty_button.tscn" id="3_yucoe"]
 [ext_resource type="PackedScene" uid="uid://c54pdfll3rtss" path="res://buttons/quit_button/quit_button.tscn" id="4_i6ank"]
 [ext_resource type="PackedScene" uid="uid://1hj7vyw747rf" path="res://high_scores/high_scores.tscn" id="4_iga78"]
+[ext_resource type="Script" path="res://main_menu/ResetHighScores.cs" id="5_hrxk3"]
 
 [sub_resource type="Environment" id="Environment_7n1pr"]
 
@@ -91,32 +92,65 @@ autoplay = "Spin"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 8
 
 [node name="PlayButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("2_7krcj")]
 layout_mode = 2
 
 [node name="DifficultySelect" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Easy" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.12549, 0.878431, 0.12549, 1)
+theme_override_colors/font_pressed_color = Color(0.12549, 0.878431, 0.12549, 1)
+theme_override_colors/font_hover_color = Color(0.12549, 0.878431, 0.12549, 1)
+theme_override_colors/font_focus_color = Color(0.12549, 0.878431, 0.12549, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.12549, 0.878431, 0.12549, 1)
+theme_override_colors/font_disabled_color = Color(0.12549, 0.878431, 0.12549, 1)
+theme_override_colors/font_outline_color = Color(0.12549, 0.878431, 0.12549, 1)
 text = "Easy"
 
 [node name="Normal" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.878431, 0.12549, 1)
+theme_override_colors/font_pressed_color = Color(0.878431, 0.878431, 0.12549, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.878431, 0.12549, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.878431, 0.12549, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.878431, 0.878431, 0.12549, 1)
+theme_override_colors/font_disabled_color = Color(0.878431, 0.878431, 0.12549, 1)
+theme_override_colors/font_outline_color = Color(0.878431, 0.878431, 0.12549, 1)
 text = "Normal"
 difficulty = 1
 
 [node name="Hard" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.12549, 0.12549, 1)
+theme_override_colors/font_pressed_color = Color(0.878431, 0.12549, 0.12549, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.12549, 0.12549, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.12549, 0.12549, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.878431, 0.12549, 0.12549, 1)
+theme_override_colors/font_disabled_color = Color(0.878431, 0.12549, 0.12549, 1)
+theme_override_colors/font_outline_color = Color(0.878431, 0.12549, 0.12549, 1)
 text = "Hard"
 difficulty = 2
 
 [node name="QuitButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("4_i6ank")]
 layout_mode = 2
 
-[node name="HighScores" parent="HBoxContainer" instance=ExtResource("4_iga78")]
+[node name="HighScoresContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="HighScores" parent="HBoxContainer/HighScoresContainer" instance=ExtResource("4_iga78")]
+layout_mode = 2
 maximumHighScores = 3
+
+[node name="ResetHighScores" type="Button" parent="HBoxContainer/HighScoresContainer" node_paths=PackedStringArray("highScores")]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Reset High Scores"
+script = ExtResource("5_hrxk3")
+highScores = NodePath("../HighScores")

@@ -10,10 +10,6 @@ public partial class CoinSpawner : Node3D
     [Export] private Vector3 minSpawnPos = new(-20f, 0.5f, -20f);
     [Export] private Vector3 maxSpawnPos = new(20f, 0.5f, 20f);
 
-    [Export] private int easyCoinsAtOnce = 20;
-    [Export] private int normalCoinsAtOnce = 15;
-    [Export] private int hardCoinsAtOnce = 10;
-
     
     private int coinsSpawned = 0;
     private RandomNumberGenerator random = new();
@@ -23,7 +19,7 @@ public partial class CoinSpawner : Node3D
     {
         base._Ready();
 
-        for (var i = 0; i < CoinsAtOnce(); i++)
+        for (var i = 0; i < DifficultySettings.instance.GetCoinAtOnce(); i++)
         {
             SpawnCoin();
         }
@@ -36,17 +32,6 @@ public partial class CoinSpawner : Node3D
         EmitSignal(SignalName.CoinCollected);
     }
     
-    
-    private int CoinsAtOnce()
-    {
-        return GameManager.instance.difficulty switch
-        {
-            GameManager.Difficulty.Easy => easyCoinsAtOnce,
-            GameManager.Difficulty.Normal => normalCoinsAtOnce,
-            GameManager.Difficulty.Hard => hardCoinsAtOnce,
-            _ => normalCoinsAtOnce
-        };
-    }
     
     private void SpawnCoin()
     {

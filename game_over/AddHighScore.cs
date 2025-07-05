@@ -9,6 +9,15 @@ public partial class AddHighScore : Control
 	{
 		base._Ready();
 
-		highScores.SaveHighScore();
+		var row = highScores.SaveHighScore();
+		if (row < 0)
+		{
+			return;
+		}
+
+		for (var i = 0; i < 4; i++)
+		{
+			highScores.grid.GetChild<Label>(row * 4 + i).Modulate = Colors.Green;
+		}
 	}
 }

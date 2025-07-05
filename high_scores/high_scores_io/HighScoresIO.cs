@@ -40,4 +40,10 @@ public class HighScoresIO
 		highScores.Sort();
 		return highScores;
 	}
+
+
+	public static void ResetHighScores(string filename = DefaultSaveFile)
+	{
+		DirAccess.RemoveAbsolute(filename);
+	}
 }
