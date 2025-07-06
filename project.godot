@@ -24,6 +24,10 @@ DifficultySettings="*res://difficulty_settings/DifficultySettings.cs"
 
 project/assembly_name="Clicking-Test"
 
+[gui]
+
+theme/custom="res://base_theme.tres"
+
 [input]
 
 move_unit={

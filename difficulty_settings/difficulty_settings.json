@@ -5,8 +5,8 @@
 		"hard": 10.0
 	},
 	"coinsAtOnce": {
-		"easy": 40,
-		"normal": 50,
+		"easy": 30,
+		"normal": 45,
 		"hard": 60
 	}
 }

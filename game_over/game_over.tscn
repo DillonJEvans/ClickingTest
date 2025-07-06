@@ -1,19 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://dto6xp1am2urf"]
+[gd_scene load_steps=3 format=3 uid="uid://dto6xp1am2urf"]
 
-[ext_resource type="Script" path="res://game_over/AddHighScore.cs" id="1_0h3cj"]
-[ext_resource type="Script" path="res://game_over/Score.cs" id="1_wgdjk"]
-[ext_resource type="PackedScene" uid="uid://chnoefqosytl8" path="res://buttons/play_button/play_button.tscn" id="2_0b8cp"]
-[ext_resource type="PackedScene" uid="uid://1y3i0k0wtri8" path="res://buttons/main_menu_button/main_menu_button.tscn" id="3_gmno0"]
+[ext_resource type="Script" path="res://game_over/GameOver.cs" id="1_ayg6u"]
 [ext_resource type="PackedScene" uid="uid://1hj7vyw747rf" path="res://high_scores/high_scores.tscn" id="5_iy4cn"]
 
-[node name="GameOver" type="Control" node_paths=PackedStringArray("highScores")]
+[node name="GameOver" type="Control" node_paths=PackedStringArray("playAgainButton", "mainMenuButton", "scoreLabel", "highScores")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_0h3cj")
+script = ExtResource("1_ayg6u")
+playAgainButton = NodePath("HBoxContainer/VBoxContainer/Buttons/PlayAgain")
+mainMenuButton = NodePath("HBoxContainer/VBoxContainer/Buttons/MainMenu")
+scoreLabel = NodePath("HBoxContainer/VBoxContainer/Score")
 highScores = NodePath("HBoxContainer/HighScores")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -48,18 +48,18 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Score: 0"
 horizontal_alignment = 1
-script = ExtResource("1_wgdjk")
 
 [node name="Buttons" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="PlayButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("2_0b8cp")]
+[node name="PlayAgain" type="Button" parent="HBoxContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "Play Again"
 
-[node name="MainMenuButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("3_gmno0")]
+[node name="MainMenu" type="Button" parent="HBoxContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+text = "Main Menu"
 
 [node name="HighScores" parent="HBoxContainer" instance=ExtResource("5_iy4cn")]
 layout_mode = 2

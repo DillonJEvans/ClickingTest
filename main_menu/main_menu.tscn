@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bu6bis6ofq5et"]
+[gd_scene load_steps=10 format=3 uid="uid://bu6bis6ofq5et"]
 
-[ext_resource type="PackedScene" uid="uid://chnoefqosytl8" path="res://buttons/play_button/play_button.tscn" id="2_7krcj"]
-[ext_resource type="PackedScene" uid="uid://d2f7tk33p202c" path="res://buttons/difficulty_button/difficulty_button.tscn" id="3_yucoe"]
-[ext_resource type="PackedScene" uid="uid://c54pdfll3rtss" path="res://buttons/quit_button/quit_button.tscn" id="4_i6ank"]
+[ext_resource type="Script" path="res://main_menu/MainMenu.cs" id="1_nwxjl"]
+[ext_resource type="ButtonGroup" uid="uid://c0wcocb8msu01" path="res://main_menu/difficulty_select_group.tres" id="2_nm1tx"]
 [ext_resource type="PackedScene" uid="uid://1hj7vyw747rf" path="res://high_scores/high_scores.tscn" id="4_iga78"]
 [ext_resource type="Script" path="res://main_menu/ResetHighScores.cs" id="5_hrxk3"]
 
@@ -32,13 +31,19 @@ _data = {
 "Spin": SubResource("Animation_h5q02")
 }
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("playButton", "quitGameButton", "easyButton", "normalButton", "hardButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_nwxjl")
+playButton = NodePath("HBoxContainer/VBoxContainer/Buttons/Play")
+quitGameButton = NodePath("HBoxContainer/VBoxContainer/Buttons/QuitGame")
+easyButton = NodePath("HBoxContainer/VBoxContainer/Buttons/DifficultySelect/Easy")
+normalButton = NodePath("HBoxContainer/VBoxContainer/Buttons/DifficultySelect/Normal")
+hardButton = NodePath("HBoxContainer/VBoxContainer/Buttons/DifficultySelect/Hard")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -94,50 +99,35 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 8
 
-[node name="PlayButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("2_7krcj")]
+[node name="Play" type="Button" parent="HBoxContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+text = "Play"
 
 [node name="DifficultySelect" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Easy" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
+[node name="Easy" type="Button" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.12549, 0.878431, 0.12549, 1)
-theme_override_colors/font_pressed_color = Color(0.12549, 0.878431, 0.12549, 1)
-theme_override_colors/font_hover_color = Color(0.12549, 0.878431, 0.12549, 1)
-theme_override_colors/font_focus_color = Color(0.12549, 0.878431, 0.12549, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.12549, 0.878431, 0.12549, 1)
-theme_override_colors/font_disabled_color = Color(0.12549, 0.878431, 0.12549, 1)
-theme_override_colors/font_outline_color = Color(0.12549, 0.878431, 0.12549, 1)
+toggle_mode = true
+button_group = ExtResource("2_nm1tx")
 text = "Easy"
 
-[node name="Normal" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
+[node name="Normal" type="Button" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.878431, 0.878431, 0.12549, 1)
-theme_override_colors/font_pressed_color = Color(0.878431, 0.878431, 0.12549, 1)
-theme_override_colors/font_hover_color = Color(0.878431, 0.878431, 0.12549, 1)
-theme_override_colors/font_focus_color = Color(0.878431, 0.878431, 0.12549, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.878431, 0.878431, 0.12549, 1)
-theme_override_colors/font_disabled_color = Color(0.878431, 0.878431, 0.12549, 1)
-theme_override_colors/font_outline_color = Color(0.878431, 0.878431, 0.12549, 1)
+toggle_mode = true
+button_group = ExtResource("2_nm1tx")
 text = "Normal"
-difficulty = 1
 
-[node name="Hard" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect" instance=ExtResource("3_yucoe")]
+[node name="Hard" type="Button" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.878431, 0.12549, 0.12549, 1)
-theme_override_colors/font_pressed_color = Color(0.878431, 0.12549, 0.12549, 1)
-theme_override_colors/font_hover_color = Color(0.878431, 0.12549, 0.12549, 1)
-theme_override_colors/font_focus_color = Color(0.878431, 0.12549, 0.12549, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.878431, 0.12549, 0.12549, 1)
-theme_override_colors/font_disabled_color = Color(0.878431, 0.12549, 0.12549, 1)
-theme_override_colors/font_outline_color = Color(0.878431, 0.12549, 0.12549, 1)
+toggle_mode = true
+button_group = ExtResource("2_nm1tx")
 text = "Hard"
-difficulty = 2
 
-[node name="QuitButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("4_i6ank")]
+[node name="QuitGame" type="Button" parent="HBoxContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+text = "Quit Game"
 
 [node name="HighScoresContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
