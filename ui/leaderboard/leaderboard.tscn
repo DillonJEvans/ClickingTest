@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://tuvsbdte486h"]
+
+[ext_resource type="Script" path="res://ui/leaderboard/Leaderboard.cs" id="1_80083"]
+[ext_resource type="PackedScene" uid="uid://d0lr0mi46irwi" path="res://ui/leaderboard/leaderboard_row/leaderboard_row.tscn" id="2_ctcmr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxlui"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 0.25098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_aa6c4"]
+color = Color(1, 1, 1, 1)
+grow_begin = 9.0
+grow_end = 9.0
+thickness = 2
+
+[node name="Leaderboard" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_oxlui")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "High Scores"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_aa6c4")
+
+[node name="HighScores" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_80083")
+rowScene = ExtResource("2_ctcmr")
+
+[node name="LeaderboardRow" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow2" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow3" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow4" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow5" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow6" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow7" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow8" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow9" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow10" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2
+
+[node name="LeaderboardRow11" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+layout_mode = 2

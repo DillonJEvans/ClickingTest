@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3 uid="uid://doq7w8nba8a6e"]
+
+[resource]
+Button/font_sizes/font_size = 32
+DifficultyColors/colors/easy_color = Color(0.188235, 0.752941, 0.25098, 1)
+DifficultyColors/colors/hard_color = Color(0.878431, 0.188235, 0.188235, 1)
+DifficultyColors/colors/normal_color = Color(0.941176, 0.627451, 0.188235, 1)
+Label/font_sizes/font_size = 32

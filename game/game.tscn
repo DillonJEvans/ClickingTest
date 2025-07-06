@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cal5hk70uh3br" path="res://game/score_text/score_text.tscn" id="6_8yari"]
 [ext_resource type="Script" path="res://game/TimeLimit.cs" id="6_pidmo"]
 [ext_resource type="Script" path="res://game/GameOverParent.cs" id="6_ukub4"]
-[ext_resource type="PackedScene" uid="uid://dto6xp1am2urf" path="res://game_over/game_over.tscn" id="7_3aaax"]
+[ext_resource type="PackedScene" uid="uid://dto6xp1am2urf" path="res://ui/game_over/game_over.tscn" id="7_3aaax"]
 [ext_resource type="Script" path="res://game/PointSound.cs" id="8_uws1w"]
 [ext_resource type="Script" path="res://game/ScoreKeeper.cs" id="11_qorr4"]
 

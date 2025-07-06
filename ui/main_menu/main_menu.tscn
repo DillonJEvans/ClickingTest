@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bu6bis6ofq5et"]
+[gd_scene load_steps=9 format=3 uid="uid://bu6bis6ofq5et"]
 
-[ext_resource type="Script" path="res://main_menu/MainMenu.cs" id="1_nwxjl"]
-[ext_resource type="ButtonGroup" uid="uid://c0wcocb8msu01" path="res://main_menu/difficulty_select_group.tres" id="2_nm1tx"]
-[ext_resource type="PackedScene" uid="uid://1hj7vyw747rf" path="res://high_scores/high_scores.tscn" id="4_iga78"]
-[ext_resource type="Script" path="res://main_menu/ResetHighScores.cs" id="5_hrxk3"]
+[ext_resource type="Script" path="res://ui/main_menu/MainMenu.cs" id="1_15iix"]
+[ext_resource type="ButtonGroup" uid="uid://c0wcocb8msu01" path="res://ui/main_menu/difficulty_select_group.tres" id="2_gcb7g"]
+[ext_resource type="PackedScene" uid="uid://tuvsbdte486h" path="res://ui/leaderboard/leaderboard.tscn" id="5_261po"]
 
 [sub_resource type="Environment" id="Environment_7n1pr"]
 
@@ -38,7 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_nwxjl")
+script = ExtResource("1_15iix")
 playButton = NodePath("HBoxContainer/VBoxContainer/Buttons/Play")
 quitGameButton = NodePath("HBoxContainer/VBoxContainer/Buttons/QuitGame")
 easyButton = NodePath("HBoxContainer/VBoxContainer/Buttons/DifficultySelect/Easy")
@@ -110,19 +109,19 @@ theme_override_constants/separation = 8
 [node name="Easy" type="Button" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("2_nm1tx")
+button_group = ExtResource("2_gcb7g")
 text = "Easy"
 
 [node name="Normal" type="Button" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("2_nm1tx")
+button_group = ExtResource("2_gcb7g")
 text = "Normal"
 
 [node name="Hard" type="Button" parent="HBoxContainer/VBoxContainer/Buttons/DifficultySelect"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("2_nm1tx")
+button_group = ExtResource("2_gcb7g")
 text = "Hard"
 
 [node name="QuitGame" type="Button" parent="HBoxContainer/VBoxContainer/Buttons"]
@@ -134,13 +133,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="HighScores" parent="HBoxContainer/HighScoresContainer" instance=ExtResource("4_iga78")]
+[node name="Leaderboard" parent="HBoxContainer/HighScoresContainer" instance=ExtResource("5_261po")]
 layout_mode = 2
-maximumHighScores = 3
-
-[node name="ResetHighScores" type="Button" parent="HBoxContainer/HighScoresContainer" node_paths=PackedStringArray("highScores")]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "Reset High Scores"
-script = ExtResource("5_hrxk3")
-highScores = NodePath("../HighScores")

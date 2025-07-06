@@ -11,14 +11,15 @@ config_version=5
 [application]
 
 config/name="Clicking-Test"
-run/main_scene="res://main_menu/main_menu.tscn"
+run/main_scene="res://ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://game_manager/game_manager.tscn"
-DifficultySettings="*res://difficulty_settings/DifficultySettings.cs"
+GameManager="*res://globals/game_manager/game_manager.tscn"
+DifficultySettings="*res://globals/difficulty_settings/DifficultySettings.cs"
+HighScores="*res://globals/high_scores/high_scores.tscn"
 
 [dotnet]
 
@@ -26,7 +27,7 @@ project/assembly_name="Clicking-Test"
 
 [gui]
 
-theme/custom="res://base_theme.tres"
+theme/custom="res://globals/base_theme.tres"
 
 [input]
 

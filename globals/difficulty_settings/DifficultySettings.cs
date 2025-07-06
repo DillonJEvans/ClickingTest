@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class DifficultySettings : Node
 {
-	public const string DefaultDifficultySettingsFile = "res://difficulty_settings/difficulty_settings.json";
+	public const string DefaultDifficultySettingsFile = "res://globals/difficulty_settings/difficulty_settings.json";
 	
 	
 	public static DifficultySettings instance { get; private set; }

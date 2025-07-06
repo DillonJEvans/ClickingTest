@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://wsl1xdprsgat"]
+
+[ext_resource type="Script" path="res://globals/high_scores/HighScores.cs" id="1_kbd0v"]
+
+[node name="HighScores" type="Node"]
+script = ExtResource("1_kbd0v")

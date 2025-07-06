@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0lr0mi46irwi"]
+
+[ext_resource type="Script" path="res://ui/leaderboard/leaderboard_row/LeaderboardRow.cs" id="1_is3ob"]
+
+[node name="LeaderboardRow" type="HBoxContainer" node_paths=PackedStringArray("rowNumberLabel", "scoreLabel", "difficultyLabel", "dateTimeLabel")]
+theme_override_constants/separation = 20
+script = ExtResource("1_is3ob")
+rowNumberLabel = NodePath("RowNumber")
+scoreLabel = NodePath("Score")
+difficultyLabel = NodePath("Difficulty")
+dateTimeLabel = NodePath("DateTime")
+lowercase = true
+
+[node name="RowNumber" type="Label" parent="."]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_font_sizes/font_size = 24
+text = "10"
+horizontal_alignment = 2
+
+[node name="Score" type="Label" parent="."]
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+text = "888"
+horizontal_alignment = 2
+
+[node name="Difficulty" type="Label" parent="."]
+custom_minimum_size = Vector2(88, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Normal"
+
+[node name="DateTime" type="Label" parent="."]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "59 minutes ago"
+horizontal_alignment = 2

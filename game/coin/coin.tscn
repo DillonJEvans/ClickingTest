@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bjb0x8nc688ev"]
 
 [ext_resource type="Script" path="res://game/coin/RandomAnimationStartPosition.cs" id="1_4dqcn"]
-[ext_resource type="PackedScene" uid="uid://dos85j8uhb1fh" path="res://bounce/bounce.tscn" id="3_p73ar"]
+[ext_resource type="PackedScene" uid="uid://dos85j8uhb1fh" path="res://game/bounce/bounce.tscn" id="3_p73ar"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40k2o"]
 albedo_color = Color(1, 1, 0, 1)
