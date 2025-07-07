@@ -56,15 +56,19 @@ public partial class LeaderboardRow : HBoxContainer
 	public void SetDateTime(DateTime newDateTime)
 	{
 		dateTime = newDateTime;
+		UpdateDateTimeLabel();
 	}
 
 
+	// This can be uncommented to cause the date time label to update every frame.
+	/*
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 		
 		UpdateDateTimeLabel();
 	}
+	*/
 	
 	
 	private void UpdateDateTimeLabel()

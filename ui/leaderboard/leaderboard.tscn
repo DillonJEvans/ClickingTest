@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://tuvsbdte486h"]
+[gd_scene load_steps=6 format=3 uid="uid://tuvsbdte486h"]
 
 [ext_resource type="Script" path="res://ui/leaderboard/Leaderboard.cs" id="1_80083"]
 [ext_resource type="PackedScene" uid="uid://d0lr0mi46irwi" path="res://ui/leaderboard/leaderboard_row/leaderboard_row.tscn" id="2_ctcmr"]
+[ext_resource type="StyleBox" uid="uid://cvtvbe3luhwej" path="res://ui/leaderboard/row_highlight.tres" id="3_n3y4o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxlui"]
 content_margin_left = 10.0
 content_margin_right = 10.0
-bg_color = Color(0, 0, 0, 0.25098)
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 0.596078)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -44,6 +45,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_aa6c4")
 layout_mode = 2
 script = ExtResource("1_80083")
 rowScene = ExtResource("2_ctcmr")
+rowHighlight = ExtResource("3_n3y4o")
 
 [node name="LeaderboardRow" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
 layout_mode = 2
@@ -51,7 +53,11 @@ layout_mode = 2
 [node name="LeaderboardRow2" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
 layout_mode = 2
 
-[node name="LeaderboardRow3" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
+[node name="RowHighlight" type="PanelContainer" parent="VBoxContainer/HighScores"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_n3y4o")
+
+[node name="LeaderboardRow3" parent="VBoxContainer/HighScores/RowHighlight" instance=ExtResource("2_ctcmr")]
 layout_mode = 2
 
 [node name="LeaderboardRow4" parent="VBoxContainer/HighScores" instance=ExtResource("2_ctcmr")]
