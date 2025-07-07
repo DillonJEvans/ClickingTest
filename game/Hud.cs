@@ -4,6 +4,7 @@ public partial class Hud : Control
 {
 	[Export] private Label scoreLabel;
 	[Export] private Label timeRemainingLabel;
+	[Export] private AnimationPlayer timeFlashingAnimation;
 	[Export] private Timer timeLimit;
 
 
@@ -31,6 +32,11 @@ public partial class Hud : Control
 		// To get the desired behavior, we check for 9.95 seconds instead of 10.
 		var decimalPlaces = timeLimit.TimeLeft >= 9.95f ? 0 : 1;
 		timeRemainingLabel.Text = timeLimit.TimeLeft.ToString($"N{decimalPlaces}");
+		
+		if (timeFlashingAnimation is not null && !timeFlashingAnimation.IsPlaying() && timeLimit.TimeLeft <= 5.0f)
+		{
+			timeFlashingAnimation.Play("flashing_red");
+		}
 	}
 	
 	private void UpdateScore()
