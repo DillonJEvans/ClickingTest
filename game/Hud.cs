@@ -4,9 +4,15 @@ public partial class Hud : Control
 {
 	[Export] private Label scoreLabel;
 	[Export] private Label timeRemainingLabel;
-	[Export] private AnimationPlayer timeFlashingAnimation;
 	[Export] private Timer timeLimit;
+	
+	[ExportGroup("Low Time Animation")]
+	[Export] private AnimationPlayer animationPlayer;
+	[Export] private string animationName = "low_time";
 
+
+	private Animation animation;
+	
 
 	public override void _Ready()
 	{
@@ -14,6 +20,7 @@ public partial class Hud : Control
 
 		scoreLabel ??= GetNode<Label>("Score");
 		timeRemainingLabel ??= GetNode<Label>("TimeRemaining");
+		animation = animationPlayer?.GetAnimation(animationName);
 	}
 
 	public override void _Process(double delta)
@@ -33,9 +40,9 @@ public partial class Hud : Control
 		var decimalPlaces = timeLimit.TimeLeft >= 9.95f ? 0 : 1;
 		timeRemainingLabel.Text = timeLimit.TimeLeft.ToString($"N{decimalPlaces}");
 		
-		if (timeFlashingAnimation is not null && !timeFlashingAnimation.IsPlaying() && timeLimit.TimeLeft <= 5.0f)
+		if (animation is not null && !animationPlayer.IsPlaying() && timeLimit.TimeLeft <= animation.Length)
 		{
-			timeFlashingAnimation.Play("flashing_red");
+			animationPlayer.Play(animationName);
 		}
 	}
 	
