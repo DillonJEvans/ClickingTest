@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwhm26oa5ilgj"]
+
+[ext_resource type="Shader" path="res://game/click/click.gdshader" id="1_ws6w0"]
+[ext_resource type="Script" path="res://game/click/Click.cs" id="2_jlrkx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vchaj"]
+render_priority = 0
+shader = ExtResource("1_ws6w0")
+shader_parameter/duration = 1.0
+shader_parameter/fade_radius = 0.35
+shader_parameter/waves = 3
+shader_parameter/width = 0.1
+shader_parameter/gap = 0.1
+shader_parameter/albedo = Color(0, 1, 1, 1)
+shader_parameter/alpha = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xpl6h"]
+material = SubResource("ShaderMaterial_vchaj")
+
+[node name="Click" type="MeshInstance3D"]
+sorting_offset = 1.0
+instance_shader_parameters/time_elapsed = 1.0
+mesh = SubResource("PlaneMesh_xpl6h")
+script = ExtResource("2_jlrkx")

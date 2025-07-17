@@ -11,7 +11,7 @@ public partial class Player : Area3D
 	[Export] private float acceleration = 10f;
 	
 	
-	private Vector3 target;
+	public Vector3 target { get; private set; }
 	private Plane movementPlane;
 	
 	private Vector3 velocity = Vector3.Zero;
